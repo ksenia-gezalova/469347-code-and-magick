@@ -11,8 +11,8 @@ var BAR_WIDTH = 40;
 var BAR_HEIGHT = 150;
 var COLUMN_GAP = TEXT_WIDTH + BAR_WIDTH;
 var CLOUD_GAP = CLOUD_X + TEXT_WIDTH;
-var INDENT_X = CLOUD_X + GAP;
-var INDENT_Y = CLOUD_Y + GAP;
+var CLOUD_SHADOW_X = CLOUD_X + GAP;
+var CLOUD_SHADOW_Y = CLOUD_Y + GAP;
 var CLOUD_GAPS_AMOUNT = 3;
 
 
@@ -22,7 +22,7 @@ var renderCloud = function (ctx, x, y, color) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, INDENT_X, INDENT_Y, 'rgba(0, 0, 0, .7)');
+  renderCloud(ctx, CLOUD_SHADOW_X, CLOUD_SHADOW_Y, 'rgba(0, 0, 0, .7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   ctx.fillStyle = '#000';
