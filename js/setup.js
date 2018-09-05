@@ -9,27 +9,21 @@ var WIZARDS_AMOUNT = 4;
 
 /* Generate random attributes for wizards - name, coat color and eyes color */
 var generateRandomName = function (names, surnames) {
-  for (var j = 0; j < names.length && j < surnames.length; j++) {
-    var randomName = Math.floor(Math.random() * names.length);
-    var randomSurname = Math.floor(Math.random() * surnames.length);
-    var fullName = names[randomName] + ' ' + surnames[randomSurname];
-  }
+  var randomName = Math.floor(Math.random() * names.length);
+  var randomSurname = Math.floor(Math.random() * surnames.length);
+  var fullName = names[randomName] + ' ' + surnames[randomSurname];
   return fullName;
 };
 
 var generateRandomCoatColor = function (coatsColor) {
-  for (var j = 0; j < coatsColor.length; j++) {
-    var randomIndex = Math.floor(Math.random() * coatsColor.length);
-    var randomCoatColor = coatsColor[randomIndex];
-  }
+  var randomIndex = Math.floor(Math.random() * coatsColor.length);
+  var randomCoatColor = coatsColor[randomIndex];
   return randomCoatColor;
 };
 
 var generateRandomEyesColor = function (eyesColor) {
-  for (var j = 0; j < eyesColor.length; j++) {
-    var randomIndex = Math.floor(Math.random() * eyesColor.length);
-    var randomEyesColor = eyesColor[randomIndex];
-  }
+  var randomIndex = Math.floor(Math.random() * eyesColor.length);
+  var randomEyesColor = eyesColor[randomIndex];
   return randomEyesColor;
 };
 
