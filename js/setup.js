@@ -39,8 +39,6 @@ for (var w = 0; w < WIZARDS_AMOUNT; w++) {
   wizards.push({'name': generateRandomName(WIZARD_NAMES, WIZARD_SURNAMES),
     'coatColor': generateRandomCoatColor(WIZARD_COATS), 'eyesColor': generateRandomEyesColor(WIZARD_EYES)});
 }
-console.log(wizards);
-
 
 /* Show setup window */
 var userDialog = document.querySelector('.setup');
