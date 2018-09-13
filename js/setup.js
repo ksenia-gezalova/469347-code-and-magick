@@ -112,6 +112,13 @@ userNameInput.addEventListener('invalid', function (evt) {
   }
 });
 
+userNameInput.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    evt.preventDefault();
+    userNameInput.blur();
+  }
+});
+
 userSubmit.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     userForm.submit();
@@ -124,7 +131,8 @@ userSubmit.addEventListener('click', function () {
 
 wizardSetup.querySelector('.wizard-coat').addEventListener('click', function () {
   var coatColor = getRandomElement(WIZARD_COATS);
-  wizardSetup.querySelector('.wizard-coat').style.fill = coatColor;document.querySelector('[name="coat-color"]').value = coatColor;
+  wizardSetup.querySelector('.wizard-coat').style.fill = coatColor;
+  document.querySelector('[name="coat-color"]').value = coatColor;
 });
 
 wizardSetup.querySelector('.wizard-eyes').addEventListener('click', function () {
