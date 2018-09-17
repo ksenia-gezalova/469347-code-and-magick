@@ -21,6 +21,12 @@ var userNameInput = userDialog.querySelector('.setup-user-name');
 var userSubmit = userDialog.querySelector('.setup-submit');
 var userForm = userDialog.querySelector('.setup-wizard-form');
 var wizardSetup = document.querySelector('.setup-wizard');
+var wizardCoat = wizardSetup.querySelector('.wizard-coat');
+var wizardCoatValue = document.querySelector('[name="coat-color"]');
+var wizardEyes = wizardSetup.querySelector('.wizard-eyes');
+var wizardEyesValue = document.querySelector('[name="eyes-color"]');
+var fireball = document.querySelector('.setup-fireball-wrap');
+var fireballValue = document.querySelector('[name="fireball-color"]');
 
 
 var getRandomElement = function (arr) {
@@ -100,7 +106,7 @@ userClose.addEventListener('focus', function (evt) {
   }
 });
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else if (userNameInput.validity.tooLong) {
@@ -129,20 +135,20 @@ userSubmit.addEventListener('click', function () {
   userForm.submit();
 });
 
-wizardSetup.querySelector('.wizard-coat').addEventListener('click', function () {
+wizardCoat.addEventListener('click', function () {
   var coatColor = getRandomElement(WIZARD_COATS);
-  wizardSetup.querySelector('.wizard-coat').style.fill = coatColor;
-  document.querySelector('[name="coat-color"]').value = coatColor;
+  wizardCoat.style.fill = coatColor;
+  wizardCoatValue.value = coatColor;
 });
 
-wizardSetup.querySelector('.wizard-eyes').addEventListener('click', function () {
+wizardEyes.addEventListener('click', function () {
   var eyesColor = getRandomElement(WIZARD_EYES);
-  wizardSetup.querySelector('.wizard-eyes').style.fill = eyesColor;
-  document.querySelector('[name="eyes-color"]').value = eyesColor;
+  wizardEyes.style.fill = eyesColor;
+  wizardEyesValue.value = eyesColor;
 });
 
-document.querySelector('.setup-fireball-wrap').addEventListener('click', function () {
+fireball.addEventListener('click', function () {
   var fireballColor = getRandomElement(FIREBALL_COLORS);
-  document.querySelector('.setup-fireball-wrap').style.background = fireballColor;
-  document.querySelector('[name="fireball-color"]').value = fireballColor;
+  fireball.style.background = fireballColor;
+  fireballValue.value = fireballColor;
 });
