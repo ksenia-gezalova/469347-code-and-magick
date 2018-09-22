@@ -211,4 +211,10 @@ userDialog.querySelector('.setup-similar').classList.remove('hidden'); */
     evt.preventDefault();
   });
 
+  userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  window.dialog = {
+
+  };
 })();
