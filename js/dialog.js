@@ -14,7 +14,6 @@
     y: 80
   };
 
-
   // вешаем обработчики
   var onPopupEscPress = function (evt) {
     if (userNameInput !== document.activeElement) {
@@ -73,18 +72,22 @@
     });
   });
 
-  userSubmit.addEventListener('keydown', function (evt) {
+  /* userSubmit.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, function () {
       userForm.submit();
     });
+    evt.preventDefault();
+  }); */
+
+  userSubmit.addEventListener('click', function (evt) {
+    window.backend.save(new FormData(userForm), function () {
+      userDialog.classList.add('hidden');
+    });
+    evt.preventDefault();
   });
 
-  userSubmit.addEventListener('click', function () {
-    userForm.submit();
-  });
-
-  /* userDialog.classList.remove('hidden');
-userDialog.querySelector('.setup-similar').classList.remove('hidden'); */
+  userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
   userOpen.addEventListener('click', openPopup);
 
@@ -213,6 +216,34 @@ userDialog.querySelector('.setup-similar').classList.remove('hidden'); */
 
   userDialog.classList.remove('hidden');
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  // при отправке формы используем функцию save и отменяем действие по умолчанию, диалог закроется, как только данные будут успешно сохранены
+  userForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(userForm), function () {
+      userDialog.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
+
+  // обработка успешной отправки формы
+  var successHandler = function (data) {
+    console.log(data);
+  };
+
+  // обработка ошибок
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.backend.save(new FormData(userForm), successHandler, errorHandler);
 
   window.dialog = {
 
