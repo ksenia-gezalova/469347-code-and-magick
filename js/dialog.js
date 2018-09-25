@@ -5,7 +5,7 @@
   var userOpen = document.querySelector('.setup-open');
   var userClose = document.querySelector('.setup-close');
   var userNameInput = userDialog.querySelector('.setup-user-name');
-  var userSubmit = userDialog.querySelector('.setup-submit');
+  // var userSubmit = userDialog.querySelector('.setup-submit');
   var userForm = userDialog.querySelector('.setup-wizard-form');
 
   // запоминаем начальные  координаты диалогового окна
@@ -70,20 +70,6 @@
       inputEvt.preventDefault();
       userNameInput.blur();
     });
-  });
-
-  /* userSubmit.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, function () {
-      userForm.submit();
-    });
-    evt.preventDefault();
-  }); */
-
-  userSubmit.addEventListener('click', function (evt) {
-    window.backend.save(new FormData(userForm), function () {
-      userDialog.classList.add('hidden');
-    });
-    evt.preventDefault();
   });
 
   userDialog.classList.remove('hidden');
@@ -219,15 +205,13 @@
 
   // при отправке формы используем функцию save и отменяем действие по умолчанию, диалог закроется, как только данные будут успешно сохранены
   userForm.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(userForm), function () {
-      userDialog.classList.add('hidden');
-    });
+    window.backend.save(new FormData(userForm), successHandler, errorHandler);
     evt.preventDefault();
   });
 
   // обработка успешной отправки формы
-  var successHandler = function (data) {
-    console.log(data);
+  var successHandler = function () {
+    userDialog.classList.add('hidden');
   };
 
   // обработка ошибок
@@ -243,7 +227,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.backend.save(new FormData(userForm), successHandler, errorHandler);
+  // window.backend.save(new FormData(userForm), successHandler, errorHandler);
 
   window.dialog = {
 
