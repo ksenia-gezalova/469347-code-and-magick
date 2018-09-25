@@ -5,7 +5,7 @@
   var userOpen = document.querySelector('.setup-open');
   var userClose = document.querySelector('.setup-close');
   var userNameInput = userDialog.querySelector('.setup-user-name');
-  var userSubmit = userDialog.querySelector('.setup-submit');
+  // var userSubmit = userDialog.querySelector('.setup-submit');
   var userForm = userDialog.querySelector('.setup-wizard-form');
 
   // запоминаем начальные  координаты диалогового окна
@@ -13,7 +13,6 @@
     x: 500,
     y: 80
   };
-
 
   // вешаем обработчики
   var onPopupEscPress = function (evt) {
@@ -73,18 +72,8 @@
     });
   });
 
-  userSubmit.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, function () {
-      userForm.submit();
-    });
-  });
-
-  userSubmit.addEventListener('click', function () {
-    userForm.submit();
-  });
-
-  /* userDialog.classList.remove('hidden');
-userDialog.querySelector('.setup-similar').classList.remove('hidden'); */
+  userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
   userOpen.addEventListener('click', openPopup);
 
@@ -213,6 +202,32 @@ userDialog.querySelector('.setup-similar').classList.remove('hidden'); */
 
   userDialog.classList.remove('hidden');
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  // при отправке формы используем функцию save и отменяем действие по умолчанию, диалог закроется, как только данные будут успешно сохранены
+  userForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(userForm), successHandler, errorHandler);
+    evt.preventDefault();
+  });
+
+  // обработка успешной отправки формы
+  var successHandler = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  // обработка ошибок
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  // window.backend.save(new FormData(userForm), successHandler, errorHandler);
 
   window.dialog = {
 
