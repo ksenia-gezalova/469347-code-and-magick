@@ -227,8 +227,6 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  // window.backend.save(new FormData(userForm), successHandler, errorHandler);
-
   window.dialog = {
 
   };
