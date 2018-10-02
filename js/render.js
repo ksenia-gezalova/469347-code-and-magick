@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var WIZARD_AMOUNT = 4;
   var wizardTemplate = document.querySelector('#similar-wizard-template');
 
   var renderWizard = function (wizard) {
@@ -18,7 +19,7 @@
   var similarList = document.querySelector('.setup-similar-list');
 
   window.render = function (data) {
-    var takeNumber = data.length > 4 ? 4 : data.length;
+    var takeNumber = data.length > WIZARD_AMOUNT ? WIZARD_AMOUNT : data.length;
     similarList.innerHTML = '';
     for (var i = 0; i < takeNumber; i++) {
       similarList.appendChild(renderWizard(data[i]));
